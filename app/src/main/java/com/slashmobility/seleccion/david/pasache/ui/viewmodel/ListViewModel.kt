@@ -6,8 +6,9 @@ import com.slashmobility.seleccion.david.pasache.business.model.GroupModel
 import com.slashmobility.seleccion.david.pasache.business.repository.GroupRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class ListViewModel(val groupRepository: GroupRepository): ViewModel() {
+class ListViewModel @Inject constructor(private val groupRepository: GroupRepository): ViewModel() {
 
     fun getGroups() {
         groupRepository.getGroups()
@@ -16,7 +17,7 @@ class ListViewModel(val groupRepository: GroupRepository): ViewModel() {
             .subscribe(this::handleListResponse, this::handleError)
     }
 
-    private fun handleListResponse(userList: List<GroupModel>) {
+    private fun handleListResponse(groupList: List<GroupModel>) {
 //        this.userList.clear()
 //        this.userList.addAll(userList)
     }

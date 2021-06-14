@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface APIService {
 
-    @GET("api/groups.json")
+    @GET("groups.json")
     fun fetchGroups(): Single<List<GroupModel>>
 
 }
