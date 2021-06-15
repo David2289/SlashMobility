@@ -3,13 +3,18 @@ package com.slashmobility.seleccion.david.pasache.ui.fragment
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.commons.ui.component.enums.DialogType
 import com.example.commons.ui.component.extensions.DialogExtensions.Companion.setup
 import com.example.commons.ui.model.button.ButtonModel
+import com.example.display.ui.adapter.GroupsAdapter
 import com.slashmobility.seleccion.david.pasache.R
+import com.slashmobility.seleccion.david.pasache.business.model.GroupModel
 import com.slashmobility.seleccion.david.pasache.databinding.ListFragmentBinding
 import com.slashmobility.seleccion.david.pasache.ui.viewmodel.ListViewModel
 import dagger.android.support.DaggerFragment
@@ -21,8 +26,13 @@ class ListFragment: DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: ListViewModel
     private lateinit var binding: ListFragmentBinding
+
+    private lateinit var adapter: GroupsAdapter
+    private lateinit var groupList: ArrayList<GroupModel>
+
     private var loadingDialog: Dialog? = null
     private var errorFetchDialog: Dialog? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +49,9 @@ class ListFragment: DaggerFragment() {
     ): View {
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
+
+        configUI()
+
         viewModel.getGroups()
         loadingDialog?.show()
 
@@ -68,13 +81,37 @@ class ListFragment: DaggerFragment() {
     private fun initObservers() {
         val errorFetchObserver = Observer<Boolean> {
             loadingDialog?.let {
-                if (it.isShowing) {
-                    it.dismiss()
-                }
+                if (it.isShowing) { it.dismiss() }
             }
+            binding.recyclerview.visibility = View.GONE
+            binding.emptyContent.visibility = View.VISIBLE
             errorFetchDialog?.show()
         }
         viewModel.errorFetchLiveData.observe(this, errorFetchObserver)
+
+        val listObserver = Observer<List<GroupModel>> { result ->
+            loadingDialog?.let {
+                if (it.isShowing) { it.dismiss() }
+            }
+            groupList.clear()
+            groupList.addAll(result)
+            adapter.notifyDataSetChanged()
+            binding.recyclerview.visibility = View.VISIBLE
+            binding.emptyContent.visibility = View.GONE
+
+        }
+        viewModel.groupListLiveData.observe(this, listObserver)
+    }
+
+    private fun configUI() {
+        groupList = ArrayList()
+        adapter = GroupsAdapter(groupList) { user ->
+//            val bundle = bundleOf(Constants.BUNDLE_USER to user)
+//            Navigation.findNavController(binding.root).navigate(R.id.action_list_to_detail, bundle)
+        }
+        val llm = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerview.layoutManager = llm
+        binding.recyclerview.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

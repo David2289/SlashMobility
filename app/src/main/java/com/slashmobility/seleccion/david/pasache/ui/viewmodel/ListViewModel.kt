@@ -1,5 +1,6 @@
 package com.slashmobility.seleccion.david.pasache.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.slashmobility.seleccion.david.pasache.business.model.GroupModel
@@ -22,11 +23,13 @@ class ListViewModel @Inject constructor(private val groupRepository: GroupReposi
     }
 
     private fun handleListResponse(groupList: List<GroupModel>) {
-//        this.userList.clear()
-//        this.userList.addAll(userList)
+        this.groupList.clear()
+        this.groupList.addAll(groupList)
+        groupListLiveData.value = this.groupList
     }
 
     private fun handleError(t: Throwable) {
+        Log.w("RETROFIT", "HAS BEEN AN ERROR: " + t.message)
         errorFetchLiveData.value = true
     }
 

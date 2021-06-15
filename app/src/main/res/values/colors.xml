@@ -11,6 +11,7 @@
     <color name="gallery">#EDEDED</color>
     <color name="black_white">#FFFFFA</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
     <!-- endregion -->
 
     <!-- region ****** REDS ****** -->

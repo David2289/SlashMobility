@@ -10,4 +10,5 @@ ext {
     nav_version = "2.3.3"
     lottie_version = "3.6.1"
     mockito_version = "3.8.0"
+    joda_version = "2.10.10"
 }
