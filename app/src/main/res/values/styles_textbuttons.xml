@@ -13,6 +13,7 @@
     <!-- region ****** TEXT BUTTON MEDIUM ****** -->
 
     <style name="TextButton.Medium" parent="TextButton">
+        <item name="android:fontFamily">@font/sailec_medium</item>
     </style>
 
     <!-- region ****** TEXT BUTTON MEDIUM BODY ****** -->
@@ -70,6 +71,7 @@
     <!-- region ****** TEXT BUTTON BOLD ****** -->
 
     <style name="TextButton.Bold" parent="TextButton">
+        <item name="android:fontFamily">@font/sailec_bold</item>
     </style>
 
 

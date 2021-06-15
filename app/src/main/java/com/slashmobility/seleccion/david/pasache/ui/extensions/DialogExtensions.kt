@@ -30,12 +30,11 @@ class DialogExtensions {
                             buttonMdl3 = buttonMdl3
                     )
                 }
-                DialogType.WRAPPED_BUTTONS -> {
-                    return setupForWrappedButtonsType(
+                DialogType.BUTTON -> {
+                    return setupForButtonType(
                             title = title,
                             desc = desc,
-                            buttonMdl1 = buttonMdl1,
-                            buttonMdl2 = buttonMdl2
+                            buttonMdl = buttonMdl1,
                     )
                 }
                 DialogType.LOADING -> {
@@ -54,32 +53,25 @@ class DialogExtensions {
             return this
         }
 
-        fun Dialog.setupForWrappedButtonsType(
+        fun Dialog.setupForButtonType(
                 title: Int = 0,
                 desc: Int = 0,
-                buttonMdl1: ButtonModel?,
-                buttonMdl2: ButtonModel? = null
+                buttonMdl: ButtonModel?
         ): Dialog {
-            this.setContentView(R.layout.dialog_wrapped_buttons)
+            this.setContentView(R.layout.dialog_button)
             val titleTV = this.findViewById<TextView>(R.id.title)
             val descTV = this.findViewById<TextView>(R.id.desc)
-            val btn1Btn = this.findViewById<Button>(R.id.button_1)
-            val btn2Btn = this.findViewById<Button>(R.id.button_2)
+            val btnBtn = this.findViewById<Button>(R.id.button)
             if (title != 0) {
                 titleTV.text = context.getString(title)
             }
             if (desc != 0) {
                 descTV.text = context.getString(desc)
             }
-            buttonMdl1?.let {
-                btn1Btn.visibility = View.VISIBLE
-                btn1Btn.text = context.getString(it.title)
-                btn1Btn.setOnClickListener { _ -> it.onClick() }
-            }
-            buttonMdl2?.let {
-                btn2Btn.visibility = View.VISIBLE
-                btn2Btn.text = context.getString(it.title)
-                btn2Btn.setOnClickListener { _ -> it.onClick() }
+            buttonMdl?.let {
+                btnBtn.visibility = View.VISIBLE
+                btnBtn.text = context.getString(it.title)
+                btnBtn.setOnClickListener { _ -> it.onClick() }
             }
             return this
         }
