@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/refresh"
         android:icon="@drawable/ic_sync_white_24dp"
         android:title="@string/screen_list_refresh"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/topics"
+        android:id="@+id/favorites"
         android:title="@string/screen_list_favorite" />
 
 </menu>

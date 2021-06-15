@@ -21,31 +21,15 @@ class ListFragment: DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: ListViewModel
     private lateinit var binding: ListFragmentBinding
-    private lateinit var loadingDialog: Dialog
-    private lateinit var errorFetchDialog: Dialog
+    private var loadingDialog: Dialog? = null
+    private var errorFetchDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ListViewModel::class.java)
 
-        // ERROR FETCH OBSERVER
-        val errorFetchObserver = Observer<Boolean> {
-            context?.let {
-                if (loadingDialog.isShowing) {
-                    loadingDialog.dismiss()
-                }
-                errorFetchDialog = Dialog(it).setup(
-                    type = DialogType.BUTTON,
-                    desc = R.string.screen_list_dialog_error_desc,
-                    buttonMdl1 = ButtonModel(
-                        title = R.string.commons_accept,
-                        onClick = { errorFetchDialog.dismiss() }
-                    )
-                )
-                errorFetchDialog.show()
-            }
-        }
-        viewModel.errorFetchLiveData.observe(this, errorFetchObserver)
+        initDialogs()
+        initObservers()
     }
 
     override fun onCreateView(
@@ -56,22 +40,60 @@ class ListFragment: DaggerFragment() {
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         viewModel.getGroups()
-
-        context?.let {
-            loadingDialog = Dialog(it).setup(
-                type = DialogType.LOADING,
-                desc = R.string.screen_list_dialog_loading_desc)
-            loadingDialog.setCancelable(false)
-            loadingDialog.show()
-        }
-
+        loadingDialog?.show()
 
         return binding.root
+    }
+
+    private fun initDialogs() {
+        context?.let {
+            if (loadingDialog == null) {
+                loadingDialog = Dialog(it).setup(
+                    type = DialogType.LOADING,
+                    desc = R.string.screen_list_dialog_loading_desc)
+            }
+            loadingDialog?.setCancelable(false)
+
+            errorFetchDialog = Dialog(it).setup(
+                type = DialogType.BUTTON,
+                desc = R.string.screen_list_dialog_error_desc,
+                buttonMdl1 = ButtonModel(
+                    title = R.string.commons_accept,
+                    onClick = { errorFetchDialog?.dismiss() }
+                )
+            )
+        }
+    }
+
+    private fun initObservers() {
+        val errorFetchObserver = Observer<Boolean> {
+            loadingDialog?.let {
+                if (it.isShowing) {
+                    it.dismiss()
+                }
+            }
+            errorFetchDialog?.show()
+        }
+        viewModel.errorFetchLiveData.observe(this, errorFetchObserver)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_screen_list, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.refresh -> {
+                viewModel.getGroups()
+                loadingDialog?.show()
+                true
+            }
+            R.id.favorites -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
