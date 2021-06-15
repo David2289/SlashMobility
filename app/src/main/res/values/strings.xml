@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">SlashMobility</string>
+
+    <string name="loading_desc">Downloading groups..</string>
+
     <string name="screen_list_title">@string/app_name</string>
     <string name="screen_list_refresh">Refresh</string>
     <string name="screen_list_favorite">Favorite</string>
