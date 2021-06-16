@@ -3,7 +3,6 @@ package com.slashmobility.seleccion.david.pasache.ui.fragment
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,7 +28,6 @@ class ListFragment: DaggerFragment() {
     private lateinit var binding: ListFragmentBinding
 
     private lateinit var adapter: GroupsAdapter
-    private lateinit var groupList: ArrayList<GroupModel>
 
     private var loadingDialog: Dialog? = null
     private var errorFetchDialog: Dialog? = null
@@ -52,9 +50,6 @@ class ListFragment: DaggerFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
 
         configUI()
-
-        viewModel.getGroups()
-        loadingDialog?.show()
 
         return binding.root
     }
@@ -80,6 +75,11 @@ class ListFragment: DaggerFragment() {
     }
 
     private fun initObservers() {
+        val loadingObserver = Observer<Boolean> {
+            loadingDialog?.show()
+        }
+        viewModel.isLoadingLiveData.observe(this, loadingObserver)
+
         val errorFetchObserver = Observer<Boolean> {
             loadingDialog?.let {
                 if (it.isShowing) { it.dismiss() }
@@ -90,12 +90,10 @@ class ListFragment: DaggerFragment() {
         }
         viewModel.errorFetchLiveData.observe(this, errorFetchObserver)
 
-        val listObserver = Observer<List<GroupModel>> { result ->
+        val listObserver = Observer<List<GroupModel>> {
             loadingDialog?.let {
                 if (it.isShowing) { it.dismiss() }
             }
-            groupList.clear()
-            groupList.addAll(result)
             adapter.notifyDataSetChanged()
             binding.recyclerview.visibility = View.VISIBLE
             binding.emptyContent.visibility = View.GONE
@@ -105,8 +103,7 @@ class ListFragment: DaggerFragment() {
     }
 
     private fun configUI() {
-        groupList = ArrayList()
-        adapter = GroupsAdapter(groupList) { user ->
+        adapter = GroupsAdapter(viewModel.groupList) { user ->
             val bundle = Bundle()
             bundle.putParcelable(Constants.BUNDLE_GROUP, user)
             bundle.putString(Constants.BUNDLE_DETAIL_TITLE, user.name)

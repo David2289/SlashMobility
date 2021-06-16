@@ -11,9 +11,15 @@ import javax.inject.Inject
 
 class ListViewModel @Inject constructor(private val groupRepository: GroupRepository): ViewModel() {
 
+    var isLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     var errorFetchLiveData: MutableLiveData<Boolean> = MutableLiveData()
     var groupListLiveData: MutableLiveData<List<GroupModel>> = MutableLiveData()
     var groupList: ArrayList<GroupModel> = ArrayList()
+
+    init {
+        getGroups()
+        isLoadingLiveData.value = true
+    }
 
     fun getGroups() {
         groupRepository.fetchGroups()
