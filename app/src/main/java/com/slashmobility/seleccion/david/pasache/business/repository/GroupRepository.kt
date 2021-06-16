@@ -9,7 +9,16 @@ import javax.inject.Inject
 class GroupRepository @Inject constructor(val groupRemoteDataSource: GroupRemoteDataSource,
                                           val groupLocalDataSource: GroupLocalDataSource) {
 
-    fun getGroups(): Single<List<GroupModel>> {
+    fun fetchGroups(): Single<List<GroupModel>> {
         return groupRemoteDataSource.fetchGroups()
     }
+
+    fun getFavoriteList(): List<GroupModel> {
+        return groupLocalDataSource.getFavoriteList()
+    }
+
+    fun saveFavorite(group: GroupModel) {
+        groupLocalDataSource.saveFavorite(group)
+    }
+
 }

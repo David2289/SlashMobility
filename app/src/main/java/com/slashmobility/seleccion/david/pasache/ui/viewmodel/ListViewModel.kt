@@ -16,7 +16,7 @@ class ListViewModel @Inject constructor(private val groupRepository: GroupReposi
     var groupList: ArrayList<GroupModel> = ArrayList()
 
     fun getGroups() {
-        groupRepository.getGroups()
+        groupRepository.fetchGroups()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::handleListResponse, this::handleError)

@@ -1,9 +1,14 @@
 package com.example.display.di.module
 
+import android.app.Application
+import androidx.room.Room
+import com.example.display.business.datasource.local.androom.dao.GroupDao
+import com.example.display.business.datasource.local.androom.database.GroupDatabase
 import com.slashmobility.seleccion.david.pasache.BuildConfig
 import com.slashmobility.seleccion.david.pasache.business.datasource.APIService
 import com.slashmobility.seleccion.david.pasache.business.datasource.GroupLocalDataSource
 import com.slashmobility.seleccion.david.pasache.business.datasource.GroupRemoteDataSource
+import com.slashmobility.seleccion.david.pasache.utility.Constants
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
@@ -46,21 +51,21 @@ class DataSourceModule {
         return GroupRemoteDataSource(apiService)
     }
 
-//    @Provides
-//    fun provideUserDatabase(context: Application): UserDatabase {
-//        return Room.databaseBuilder(context, UserDatabase::class.java, Constants.USER_DATABASE)
-//            .allowMainThreadQueries()
-//            .build()
-//    }
-//
-//    @Provides
-//    fun provideUserDao(userDatabase: UserDatabase): UserDao {
-//        return userDatabase.userDao()
-//    }
+    @Provides
+    fun provideGroupDatabase(context: Application): GroupDatabase {
+        return Room.databaseBuilder(context, GroupDatabase::class.java, Constants.GROUP_DATABASE)
+            .allowMainThreadQueries()
+            .build()
+    }
 
     @Provides
-    fun providesGroupLocalDataSource(): GroupLocalDataSource {
-        return GroupLocalDataSource()
+    fun provideGroupDao(userDatabase: GroupDatabase): GroupDao {
+        return userDatabase.groupDao()
+    }
+
+    @Provides
+    fun providesGroupLocalDataSource(groupDao: GroupDao): GroupLocalDataSource {
+        return GroupLocalDataSource(groupDao)
     }
 
 }
