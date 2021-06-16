@@ -25,7 +25,11 @@
     <fragment
         android:id="@+id/detail"
         android:name="com.slashmobility.seleccion.david.pasache.ui.fragment.DetailFragment"
-        android:label="@string/screen_detail_title"
-        tools:layout="@layout/detail_fragment" />
+        android:label="{BUNDLE_DETAIL_TITLE}"
+        tools:layout="@layout/detail_fragment" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

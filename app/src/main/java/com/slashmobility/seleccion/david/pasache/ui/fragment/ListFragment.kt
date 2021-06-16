@@ -107,7 +107,9 @@ class ListFragment: DaggerFragment() {
     private fun configUI() {
         groupList = ArrayList()
         adapter = GroupsAdapter(groupList) { user ->
-            val bundle = bundleOf(Constants.BUNDLE_GROUP to user)
+            val bundle = Bundle()
+            bundle.putParcelable(Constants.BUNDLE_GROUP, user)
+            bundle.putString(Constants.BUNDLE_DETAIL_TITLE, user.name)
             Navigation.findNavController(binding.root).navigate(R.id.action_list_to_detail, bundle)
         }
         val llm = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

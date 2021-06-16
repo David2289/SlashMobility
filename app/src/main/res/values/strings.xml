@@ -11,5 +11,5 @@
     <string name="screen_list_favorite">Favorite</string>
     <string name="screen_list_no_results">No groups</string>
 
-    <string name="screen_detail_title">---</string>
+    <string name="screen_detail_title">Detail</string>
 </resources>

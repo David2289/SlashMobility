@@ -4,6 +4,7 @@ class Constants {
 
     companion object {
         val BUNDLE_GROUP = "BUNDLE_GROUP"
+        val BUNDLE_DETAIL_TITLE = "BUNDLE_DETAIL_TITLE"
         val GROUP_DATABASE = "group_database"
     }
 
