@@ -34,16 +34,22 @@
         android:id="@+id/detail"
         android:name="com.slashmobility.seleccion.david.pasache.ui.fragment.DetailFragment"
         android:label="{BUNDLE_DETAIL_TITLE}"
-        tools:layout="@layout/detail_fragment" >
-        <argument
-            android:name="title"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/detail_fragment" />
 
     <fragment
         android:id="@+id/favorites"
         android:name="com.slashmobility.seleccion.david.pasache.ui.fragment.FavoritesFragment"
         android:label="@string/screen_favorite_title"
-        tools:layout="@layout/favorites_fragment" />
+        tools:layout="@layout/favorites_fragment">
+
+        <action
+            android:id="@+id/action_favorites_to_detail"
+            app:destination="@id/detail"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
 
 </navigation>

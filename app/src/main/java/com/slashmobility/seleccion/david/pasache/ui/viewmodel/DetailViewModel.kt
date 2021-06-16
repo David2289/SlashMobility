@@ -7,10 +7,6 @@ import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(private val groupRepository: GroupRepository): ViewModel() {
 
-    fun getFavoriteList() {
-
-    }
-
     fun saveFavorite(group: GroupModel) {
         groupRepository.saveFavorite(group)
     }

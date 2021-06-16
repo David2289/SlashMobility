@@ -12,11 +12,7 @@ class FavoritesViewModel @Inject constructor(private val groupRepository: GroupR
     var favoriteListLiveData: MutableLiveData<List<GroupModel>> = MutableLiveData()
     var favoriteList: ArrayList<GroupModel> = ArrayList()
 
-    init {
-        getFavorites()
-    }
-
-    private fun getFavorites() {
+    fun getFavorites() {
         if (groupRepository.getFavoriteList().isEmpty()) {
             emptyListLiveData.value = true
         } else {

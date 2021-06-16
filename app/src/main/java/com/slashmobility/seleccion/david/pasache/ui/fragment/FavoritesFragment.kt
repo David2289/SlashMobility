@@ -42,6 +42,7 @@ class FavoritesFragment: DaggerFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.favorites_fragment, container, false)
 
         configUI()
+        viewModel.getFavorites()
 
         return binding.root
     }
@@ -66,7 +67,7 @@ class FavoritesFragment: DaggerFragment() {
             val bundle = Bundle()
             bundle.putParcelable(Constants.BUNDLE_GROUP, group)
             bundle.putString(Constants.BUNDLE_DETAIL_TITLE, group.name)
-            Navigation.findNavController(binding.root).navigate(R.id.action_list_to_detail, bundle)
+            Navigation.findNavController(binding.root).navigate(R.id.action_favorites_to_detail, bundle)
         }
         val llm = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerview.layoutManager = llm
