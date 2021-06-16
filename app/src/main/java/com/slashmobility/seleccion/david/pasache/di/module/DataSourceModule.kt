@@ -59,8 +59,8 @@ class DataSourceModule {
     }
 
     @Provides
-    fun provideGroupDao(userDatabase: GroupDatabase): GroupDao {
-        return userDatabase.groupDao()
+    fun provideGroupDao(groupDatabase: GroupDatabase): GroupDao {
+        return groupDatabase.groupDao()
     }
 
     @Provides

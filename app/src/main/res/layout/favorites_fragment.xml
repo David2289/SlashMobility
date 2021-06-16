@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.fragment.ListFragment">
+    tools:context=".ui.fragment.FavoritesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 style="@style/Font.Regular.Subtitle.Black"
-                android:text="@string/screen_list_no_results"/>
+                android:text="@string/screen_favorite_no_results"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

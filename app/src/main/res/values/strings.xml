@@ -12,4 +12,8 @@
     <string name="screen_list_no_results">No groups</string>
 
     <string name="screen_detail_title">Detail</string>
+
+    <string name="screen_favorite_title">Favorites</string>
+    <string name="screen_favorite_no_results">No groups</string>
+
 </resources>

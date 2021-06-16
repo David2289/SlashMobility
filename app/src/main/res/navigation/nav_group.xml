@@ -20,6 +20,14 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"/>
 
+        <action
+            android:id="@+id/action_list_to_favorites"
+            app:destination="@id/favorites"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
     </fragment>
 
     <fragment
@@ -31,5 +39,11 @@
             android:name="title"
             app:argType="string" />
     </fragment>
+
+    <fragment
+        android:id="@+id/favorites"
+        android:name="com.slashmobility.seleccion.david.pasache.ui.fragment.FavoritesFragment"
+        android:label="@string/screen_favorite_title"
+        tools:layout="@layout/favorites_fragment" />
 
 </navigation>

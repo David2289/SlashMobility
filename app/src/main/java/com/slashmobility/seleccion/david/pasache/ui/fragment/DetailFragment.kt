@@ -44,8 +44,10 @@ class DetailFragment: DaggerFragment() {
         binding.icFavorite.setOnClickListener { view ->
             view.isSelected = !view.isSelected
             if (view.isSelected) {
+                group.isFavorite = true
                 viewModel.saveFavorite(group)
             } else {
+                group.isFavorite = false
                 viewModel.deleteFavorite(group)
             }
         }

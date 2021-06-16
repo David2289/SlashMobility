@@ -103,10 +103,10 @@ class ListFragment: DaggerFragment() {
     }
 
     private fun configUI() {
-        adapter = GroupsAdapter(viewModel.groupList) { user ->
+        adapter = GroupsAdapter(viewModel.groupList) { group ->
             val bundle = Bundle()
-            bundle.putParcelable(Constants.BUNDLE_GROUP, user)
-            bundle.putString(Constants.BUNDLE_DETAIL_TITLE, user.name)
+            bundle.putParcelable(Constants.BUNDLE_GROUP, group)
+            bundle.putString(Constants.BUNDLE_DETAIL_TITLE, group.name)
             Navigation.findNavController(binding.root).navigate(R.id.action_list_to_detail, bundle)
         }
         val llm = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -127,6 +127,7 @@ class ListFragment: DaggerFragment() {
                 true
             }
             R.id.favorites -> {
+                Navigation.findNavController(binding.root).navigate(R.id.action_list_to_favorites)
                 true
             }
             else -> super.onOptionsItemSelected(item)

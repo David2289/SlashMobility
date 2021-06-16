@@ -31,9 +31,13 @@ class ListViewModel @Inject constructor(private val groupRepository: GroupReposi
     private fun handleListResponse(groupList: List<GroupModel>) {
         // Setting Favorite
         for (group in groupList) {
-            for (favorite in groupRepository.getFavoriteList()) {
-                group.isFavorite = group.id == favorite.id
-                continue
+            favoriteLoop@ for (favorite in groupRepository.getFavoriteList()) {
+                if (group.id == favorite.id) {
+                    group.isFavorite = true
+                    break@favoriteLoop
+                } else {
+                    group.isFavorite = false
+                }
             }
         }
         this.groupList.clear()
