@@ -89,13 +89,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:id="@+id/ic_heart"
+                android:id="@+id/ic_favorite"
                 android:layout_width="@dimen/commons_35dp"
                 android:layout_height="@dimen/commons_35dp"
                 app:layout_constraintTop_toBottomOf="@+id/top_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_margin="@dimen/commons_10dp"
-                android:src="@drawable/ic_favorite_border_black_24dp"
+                android:src="@drawable/ic_favorite"
                 android:scaleType="centerCrop"
                 android:contentDescription="@null" />
 
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Font.Regular.Body.Black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ic_heart"
+                app:layout_constraintTop_toBottomOf="@+id/ic_favorite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="@dimen/commons_20dp"

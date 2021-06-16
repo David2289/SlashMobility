@@ -33,6 +33,8 @@ class DetailFragment: Fragment() {
         binding.group = group
         Picasso.get().load(group.defaultImageUrl).into(binding.bgImage)
 
+        binding.icFavorite.setOnClickListener { view -> view.isSelected = !view.isSelected }
+
         return binding.root
     }
 }
