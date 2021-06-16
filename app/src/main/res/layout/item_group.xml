@@ -48,7 +48,6 @@
             android:background="@color/white_80"
             android:paddingStart="@dimen/commons_05dp"
             android:paddingEnd="@dimen/commons_05dp"
-            android:maxLines="1"
             tools:text="Group description"/>
 
         <TextView

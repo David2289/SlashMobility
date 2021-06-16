@@ -20,12 +20,14 @@ class GroupsAdapter(var groupList: List<GroupModel>, val onItemClick: (group: Gr
     }
 
     override fun onBindViewHolder(holder: GroupVH, position: Int) {
-        val group = groupList.get(position)
+        val group = groupList[position]
         Picasso.get().load(group.defaultImageUrl).into(holder.bgImage)
         holder.name.text = group.name
         holder.descShort.text = group.descriptionShort
-        holder.date.text = DateUtils.date(group.date.toLong(), "dd/MM/yyyy")
-//        holder.view.setOnClickListener { onItemClick(user) }
+        val dateFormat = DateUtils.date(group.date.toLong(), "dd/MM/yyyy")
+        group.dateFormat = dateFormat
+        holder.date.text = group.dateFormat
+        holder.view.setOnClickListener { onItemClick(group) }
     }
 
     class GroupVH(val view: View): RecyclerView.ViewHolder(view) {

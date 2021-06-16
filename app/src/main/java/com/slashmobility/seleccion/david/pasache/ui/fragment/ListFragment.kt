@@ -17,6 +17,7 @@ import com.slashmobility.seleccion.david.pasache.R
 import com.slashmobility.seleccion.david.pasache.business.model.GroupModel
 import com.slashmobility.seleccion.david.pasache.databinding.ListFragmentBinding
 import com.slashmobility.seleccion.david.pasache.ui.viewmodel.ListViewModel
+import com.slashmobility.seleccion.david.pasache.utility.Constants
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -106,8 +107,8 @@ class ListFragment: DaggerFragment() {
     private fun configUI() {
         groupList = ArrayList()
         adapter = GroupsAdapter(groupList) { user ->
-//            val bundle = bundleOf(Constants.BUNDLE_USER to user)
-//            Navigation.findNavController(binding.root).navigate(R.id.action_list_to_detail, bundle)
+            val bundle = bundleOf(Constants.BUNDLE_GROUP to user)
+            Navigation.findNavController(binding.root).navigate(R.id.action_list_to_detail, bundle)
         }
         val llm = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerview.layoutManager = llm
