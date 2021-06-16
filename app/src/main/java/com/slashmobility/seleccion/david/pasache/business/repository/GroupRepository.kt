@@ -21,4 +21,8 @@ class GroupRepository @Inject constructor(val groupRemoteDataSource: GroupRemote
         groupLocalDataSource.saveFavorite(group)
     }
 
+    fun deleteFavorite(group: GroupModel) {
+        groupLocalDataSource.deleteFavorite(group)
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.display.business.datasource.local.androom.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.slashmobility.seleccion.david.pasache.business.model.GroupModel
@@ -13,5 +14,8 @@ interface GroupDao {
 
     @Insert
     fun insert(group: GroupModel)
+
+    @Delete
+    fun delete(group: GroupModel)
 
 }

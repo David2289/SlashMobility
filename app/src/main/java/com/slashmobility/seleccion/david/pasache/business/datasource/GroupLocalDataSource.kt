@@ -14,4 +14,8 @@ class GroupLocalDataSource @Inject constructor(private val groupDao: GroupDao) {
         groupDao.insert(group)
     }
 
+    fun deleteFavorite(group: GroupModel) {
+        groupDao.delete(group)
+    }
+
 }

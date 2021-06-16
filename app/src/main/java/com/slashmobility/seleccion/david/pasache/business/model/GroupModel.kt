@@ -22,6 +22,8 @@ data class GroupModel(
 
     var descriptionShort: String,
 
-    var name: String
+    var name: String,
+
+    var isFavorite: Boolean
 
 ): Parcelable
