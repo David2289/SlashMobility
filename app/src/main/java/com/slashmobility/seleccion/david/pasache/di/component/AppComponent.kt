@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.display.di.module.AppModule
 import com.example.display.di.module.FragmentBindingModule
 import com.slashmobility.seleccion.david.pasache.AppApplication
+import com.slashmobility.seleccion.david.pasache.di.module.ActivityBindingModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -11,6 +12,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 
 @Component(modules = arrayOf(
     AppModule::class,
+    ActivityBindingModule::class,
     FragmentBindingModule::class,
     AndroidSupportInjectionModule::class
 ))

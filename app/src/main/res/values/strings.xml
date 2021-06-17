@@ -16,4 +16,7 @@
     <string name="screen_favorite_title">Favorites</string>
     <string name="screen_favorite_no_results">No groups</string>
 
+    <string name="screen_images_dialog_loading_desc">Downloading images..</string>
+    <string name="screen_images_dialog_error_desc">Something went wrong downloading the images.</string>
+
 </resources>

@@ -10,4 +10,8 @@ class GroupRemoteDataSource @Inject constructor(val apiService: APIService) {
         return apiService.fetchGroups()
     }
 
+    fun fetchImages(groupId: String): Single<List<String>> {
+        return apiService.fetchImages(groupId)
+    }
+
 }

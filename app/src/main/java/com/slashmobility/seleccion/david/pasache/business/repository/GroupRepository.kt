@@ -13,6 +13,10 @@ class GroupRepository @Inject constructor(val groupRemoteDataSource: GroupRemote
         return groupRemoteDataSource.fetchGroups()
     }
 
+    fun fetchImages(groupId: String): Single<List<String>> {
+        return groupRemoteDataSource.fetchImages(groupId)
+    }
+
     fun getFavoriteList(): List<GroupModel> {
         return groupLocalDataSource.getFavoriteList()
     }

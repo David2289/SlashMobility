@@ -1,5 +1,6 @@
 package com.slashmobility.seleccion.david.pasache.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.slashmobility.seleccion.david.pasache.R
 import com.slashmobility.seleccion.david.pasache.business.model.GroupModel
 import com.slashmobility.seleccion.david.pasache.databinding.DetailFragmentBinding
+import com.slashmobility.seleccion.david.pasache.ui.activity.ImagesActivity
 import com.slashmobility.seleccion.david.pasache.ui.viewmodel.DetailViewModel
 import com.slashmobility.seleccion.david.pasache.utility.Constants
 import com.squareup.picasso.Picasso
@@ -39,6 +41,12 @@ class DetailFragment: DaggerFragment() {
         group = arguments?.getParcelable<GroupModel>(Constants.BUNDLE_GROUP) as GroupModel
         binding.group = group
         Picasso.get().load(group.defaultImageUrl).into(binding.bgImage)
+
+        binding.bgImage.setOnClickListener {
+            val intent = Intent(context, ImagesActivity::class.java)
+            intent.putExtra(Constants.EXTRA_GROUPID, group.id.toString())
+            startActivity(intent)
+        }
 
         binding.icFavorite.isSelected = group.isFavorite
         binding.icFavorite.setOnClickListener { view ->
