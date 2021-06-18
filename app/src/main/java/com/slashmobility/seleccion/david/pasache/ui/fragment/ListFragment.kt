@@ -105,6 +105,7 @@ class ListFragment: DaggerFragment() {
     private fun configUI() {
         binding.recyclerview.visibility = if (viewModel.groupList.isEmpty()) View.GONE else View.VISIBLE
         binding.emptyContent.visibility = if (viewModel.groupList.isEmpty()) View.VISIBLE else View.GONE
+        viewModel.updateList(viewModel.groupList)
         adapter = GroupsAdapter(viewModel.groupList) { group ->
             val bundle = Bundle()
             bundle.putParcelable(Constants.BUNDLE_GROUP, group)

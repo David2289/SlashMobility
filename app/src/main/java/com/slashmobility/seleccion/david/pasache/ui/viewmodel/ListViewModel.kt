@@ -29,17 +29,7 @@ class ListViewModel @Inject constructor(private val groupRepository: GroupReposi
     }
 
     private fun handleListResponse(groupList: List<GroupModel>) {
-        // Setting Favorite
-        for (group in groupList) {
-            favoriteLoop@ for (favorite in groupRepository.getFavoriteList()) {
-                if (group.id == favorite.id) {
-                    group.isFavorite = true
-                    break@favoriteLoop
-                } else {
-                    group.isFavorite = false
-                }
-            }
-        }
+        updateList(groupList)
         this.groupList.clear()
         this.groupList.addAll(groupList)
         groupListLiveData.value = this.groupList
@@ -48,6 +38,23 @@ class ListViewModel @Inject constructor(private val groupRepository: GroupReposi
     private fun handleError(t: Throwable) {
         Log.w("RETROFIT", "HAS BEEN AN ERROR: " + t.message)
         errorFetchLiveData.value = true
+    }
+
+    /**
+     * updates the list favourite param
+     */
+    fun updateList(groupList: List<GroupModel>) {
+        if (groupList.isEmpty()) return
+        // Setting Favorite
+        for (group in groupList) {
+            group.isFavorite = false
+            favoriteLoop@ for (favorite in groupRepository.getFavoriteList()) {
+                if (group.id == favorite.id) {
+                    group.isFavorite = true
+                    break@favoriteLoop
+                }
+            }
+        }
     }
 
 }
